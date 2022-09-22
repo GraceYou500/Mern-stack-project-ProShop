@@ -1,9 +1,10 @@
 import express from 'express'; // like import in JS, this express is the syntax of Node JS.
 import dotenv from 'dotenv';
 import colors from 'colors';
-// import products from './data/products.js';
+import products from './data/products.js';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
 connectDB();
@@ -17,6 +18,10 @@ app.get('/', (req, res) => {
 // get is a listener=> listen the request to the url
 
 app.use('/api/products', productRoutes);
+
+app.use(notFound);
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
