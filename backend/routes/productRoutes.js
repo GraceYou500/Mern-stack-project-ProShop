@@ -10,6 +10,7 @@ router.get(
   '/',
   asyncHandler(async (req, res) => {
     const products = await Product.find({});
+    // throw new Error('Some Error');
 
     res.json(products);
   })
@@ -21,9 +22,12 @@ router.get(
 
 router.get(
   '/:id',
-  asyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
+  asyncHandler(async (req, res, next) => {
+    console.log('product & id', req.params.id, res.statusCode);
 
+    const product = await Product.findById(req.params.id);
+    // const product = undefined;
+    console.log('product & id2');
     if (product) {
       res.json(product);
     } else {
