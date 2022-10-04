@@ -5,11 +5,14 @@ import products from './data/products.js';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 connectDB();
 
 const app = express();
+
+app.use(express.json()); // can accept json data
 
 app.get('/', (req, res) => {
   res.send('API is running...0000');
@@ -17,7 +20,8 @@ app.get('/', (req, res) => {
 }); // create a route, meaning if we get a GST request to slash, we want to run the function
 // get is a listener=> listen the request to the url
 
-app.use('/api/products', productRoutes);
+app.use('/api/products', productRoutes); // use same as listen
+app.use('/api/users', userRoutes);
 
 app.use(notFound);
 
