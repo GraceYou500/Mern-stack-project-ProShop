@@ -17,10 +17,11 @@ const CartScreen = () => {
   const params = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log('cart screen', params, location);
+  console.log('cart screen', location);
 
   const productId = params.id;
   const qty = location.search ? Number(location.search.split('=')[1]) : 1;
+  console.log('location.search--------------------', location.search);
 
   const dispatch = useDispatch();
 

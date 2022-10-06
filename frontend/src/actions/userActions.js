@@ -39,7 +39,7 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-fetch.post('/api', {
-  headers: ',,,,',
-  body: JSON.stringify({ email, password }),
-});
+// fetch.post('/api', {
+//   headers: ',,,,',
+//   body: JSON.stringify({ email, password }),
+// });
