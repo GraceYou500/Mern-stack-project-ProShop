@@ -43,3 +43,8 @@ export const login = (email, password) => async (dispatch) => {
 //   headers: ',,,,',
 //   body: JSON.stringify({ email, password }),
 // });
+
+export const logout = () => async (dispatch) => {
+  localStorage.removeItem('userInfo');
+  dispatch({ type: USER_LOGOUT });
+};
