@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Row,
@@ -17,12 +23,13 @@ const CartScreen = () => {
   const params = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   console.log('cart screen', location);
 
-  const productId = params.id;
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1;
-  console.log('location.search--------------------', location.search);
+  const qty = Number(searchParams.get('qty'));
+  const productId = searchParams.get('productId');
 
+  console.log('qty, productId', qty, productId);
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
