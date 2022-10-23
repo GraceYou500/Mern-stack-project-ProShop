@@ -29,7 +29,7 @@ export const login = (email, password) => async (dispatch) => {
       '/api/users/login',
       { email, password },
       config
-    );
+    ); // data is the response.json
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
