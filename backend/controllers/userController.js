@@ -29,8 +29,6 @@ const authUser = asyncHandler(async (req, res) => {
 // @route          Get  /api/users/profile
 // @access         Private
 const getUserProfile = asyncHandler(async (req, res) => {
-  console.log('getUserProfile................');
-
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -107,4 +105,12 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, registerUser, getUserProfile, updateUserProfile };
+// @description    Get all users
+// @route          Get  /api/users
+// @access         Private/Admin
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+});
+
+export { authUser, registerUser, getUserProfile, updateUserProfile, getUsers };
