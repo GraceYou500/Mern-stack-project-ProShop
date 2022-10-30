@@ -145,15 +145,17 @@ const getUserById = asyncHandler(async (req, res) => {
 // @route          PUT  /api/users/:id
 // @access         Private/Admin
 const updateUser = asyncHandler(async (req, res) => {
+  console.log('backedn user.........', req.body);
   const user = await User.findById(req.params.id);
 
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    user.isAdmin = req.body.isAdmin || user.isAdmin;
+    user.isAdmin = req.body.isAdmin;
 
     const updatedUser = await user.save();
 
+    console.log('updatedUser.isAdmin.........', updatedUser);
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
