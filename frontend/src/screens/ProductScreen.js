@@ -11,8 +11,7 @@ import {
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Rating from '../components/Rating';
-// import products from '../products';
-
+import Meta from '../components/Meta';
 import {
   listProductDetails,
   createProductReview,
@@ -71,6 +70,7 @@ const ProductScreen = () => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
+          <Meta title={product.name} />
           <Row>
             <Col md={6}>
               <Image src={product.image} alt={product.name} fluid />
