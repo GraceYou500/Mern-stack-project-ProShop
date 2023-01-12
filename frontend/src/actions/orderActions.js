@@ -19,6 +19,7 @@ import {
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_FAIL,
 } from '../constants/orderConstants';
+import { clearCart } from '../actions/cartActions';
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
@@ -113,6 +114,11 @@ export const payOrder =
         config
       );
 
+      if (data && data.isPaid) {
+        // console.log("data.isPaid", data.isPaid);
+        dispatch(clearCart());
+      }
+      // console.log("payOrder....", data);
       dispatch({
         type: ORDER_PAY_SUCCESS,
         payload: data,

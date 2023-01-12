@@ -34,13 +34,25 @@ const CartScreen = () => {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   console.log('cart', cart, cartItems);
   console.log('cartItems', cartItems);
+
+  const orderDetails = useSelector((state) => state.orderDetails);
+  const { order } = orderDetails;
 
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
+
+    // if (!userInfo) {
+    //   navigate('/');
+    // }
+
   }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {

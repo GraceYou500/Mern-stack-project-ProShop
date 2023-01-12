@@ -4,6 +4,7 @@ import {
   CART_REMOVE_ITEM,
   CART_SAVE_SHIPPING_ADDRESS,
   CART_SAVE_PAYMENT_METHOD,
+  CLEAR_CART,
 } from '../constants/cartConstants';
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
@@ -50,3 +51,10 @@ export const savePaymentMethod = (data) => (dispatch) => {
 
   localStorage.setItem('paymentMethod', JSON.stringify(data));
 };
+
+export const clearCart = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_CART,
+  });
+  localStorage.removeItem("cartItems");
+}
