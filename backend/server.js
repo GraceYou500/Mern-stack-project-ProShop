@@ -12,7 +12,7 @@ import orderRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 
 dotenv.config();
-connectDB();
+// connectDB();
 
 const app = express();
 
@@ -56,9 +56,21 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(
-  PORT,
-  console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
-  )
-); // listen on a port 5000
+// app.listen(
+//   PORT,
+//   console.log(
+//     `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+//   )
+// ); // listen on a port 5000
+
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URL);
+
+    app.listen(PORT, () => {
+      console.log(`Server is listening on port ${PORT}...`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
