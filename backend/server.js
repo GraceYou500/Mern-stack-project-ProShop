@@ -11,8 +11,11 @@ import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 
+console.log("process.env.NODE_ENV...1",process.env.NODE_ENV);
 dotenv.config();
-// connectDB();
+console.log("process.env.NODE_ENV...2",process.env.NODE_ENV);
+
+connectDB();
 
 const app = express();
 
@@ -36,6 +39,7 @@ app.get('/api/config/paypal', (req, res) =>
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
+
 if (process.env.NODE_ENV === 'production') {
   // means when we deploy to the server
   app.use(express.static(path.join(__dirname, '/frontend/build'))); // set the build folder as static folder so that we can access to and load the build-index.html directly
@@ -44,6 +48,13 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
   ); // if we are in production, we are going to go ahead and get any route that is not our API to point to the index.html
 } else {
+    // means when we deploy to the server
+    app.use(express.static(path.join(__dirname, '/frontend/build'))); // set the build folder as static folder so that we can access to and load the build-index.html directly
+
+    app.get('*', (req, res) =>
+      res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+    ); // if we are in production, we are going to go ahead and get any route that is not our API to point to the index.html
+    
   app.get('/', (req, res) => {
     res.send('API is running...0000');
     // send to client
@@ -56,21 +67,27 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-// app.listen(
-//   PORT,
-//   console.log(
-//     `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
-//   )
-// ); // listen on a port 5000
+app.listen(
+  PORT,
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+  )
+); // listen on a port 5000
 
-const start = async () => {
-  try {
-    await connectDB(process.env.MONGO_URL);
+// const start = async () => {
+//   try {
+    
+//     console.log("Start NODE_ENV....", process.env.NODE_ENV);
+//     console.log("Start TEST_URL....", process.env.TEST_URL);
+//     console.log("Start MONGO_URL....", process.env.MONGO_URL);
+//     await connectDB(process.env.MONGO_URL);
 
-    app.listen(PORT, () => {
-      console.log(`Server is listening on port ${PORT}...`);
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     app.listen(PORT, () => {
+//       console.log(`Server is listening on port ${PORT}...`);
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// start();
