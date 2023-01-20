@@ -10,6 +10,9 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+import helmet from 'helmet';
+import xss from 'xss-clean';
+
 
 console.log("process.env.NODE_ENV...1",process.env.NODE_ENV);
 dotenv.config();
@@ -24,6 +27,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.json()); // can accept json data
+app.use(helmet());
+app.use(xss());
 
 app.use('/api/products', productRoutes); // use same as listen
 app.use('/api/users', userRoutes);
