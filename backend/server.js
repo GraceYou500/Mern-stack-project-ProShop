@@ -31,7 +31,7 @@ app.use(express.json()); // can accept json data
 app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "https://www.sandbox.paypal.com/", "https://www.paypal.com"],
+    scriptSrc: ["'self'","'unsafe-inline'", "https://www.sandbox.paypal.com/", "https://www.paypal.com"],
   },
 }));
 app.use(xss());
