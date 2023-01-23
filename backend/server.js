@@ -27,7 +27,13 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.json()); // can accept json data
-app.use(helmet());
+
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", "'paypal.com'"],
+  },
+}));
 app.use(xss());
 
 app.use('/api/products', productRoutes); // use same as listen

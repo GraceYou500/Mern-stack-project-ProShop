@@ -73,12 +73,13 @@ const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
 };
 
-const middleware = [thunk];
+const middleware = [thunk];  //in the array, thunk middleware allow us to make async requests, because we will talk to the server from thoese actions.
 
 const store = createStore(
   reducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
+  composeWithDevTools(applyMiddleware(...middleware)) // composeWithDevTools: to use the redux dev tools extension, so we can monitor every action and state.
 );
+// connect reducers and some middleware
 
 export default store;
