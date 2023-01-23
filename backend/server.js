@@ -32,6 +32,8 @@ app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'"],
     scriptSrc: ["'self'","'unsafe-inline'", "https://www.sandbox.paypal.com/", "https://www.paypal.com"],
+    frameSrc: ["'self'","https://www.sandbox.paypal.com/"],
+    connectSrc:["'self'","https://www.sandbox.paypal.com/"],
   },
 }));
 app.use(xss());
